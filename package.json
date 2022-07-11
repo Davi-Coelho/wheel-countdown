@@ -2,9 +2,10 @@
   "name": "wheel-countdown",
   "version": "1.0.0",
   "description": "Contador de tempo para a roleta do Streamlabs",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon main.js"
+    "start": "nodemon app.js",
+    "serve": "pm2 start app.js --name wheel_countdown"
   },
   "repository": {
     "type": "git",
