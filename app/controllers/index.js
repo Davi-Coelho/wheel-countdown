@@ -1,7 +1,3 @@
-module.exports.index = (application, req, res) => {
-    res.render('index')
-}
-
 module.exports.wheelCounter = (application, req, res) => {
     const data = req.query.msg
     const channel = req.query.channel
