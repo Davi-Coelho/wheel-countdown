@@ -1,6 +1,5 @@
 const express = require('express')
 const consign = require('consign')
-const cors = require('cors')
 const app = express()
 
 app.set('view engine', 'ejs')
