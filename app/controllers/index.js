@@ -3,7 +3,7 @@ module.exports.index = (application, req, res) => {
 }
 
 module.exports.wheelCounter = (application, req, res) => {
-    const data = req.body.msg
+    const data = req.query.msg
     const command = data.split(' ')
     let value = parseFloat(command[1])
     console.log(data)
