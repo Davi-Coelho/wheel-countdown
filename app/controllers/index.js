@@ -4,6 +4,7 @@ module.exports.index = (application, req, res) => {
 
 module.exports.wheelCounter = (application, req, res) => {
     const data = req.query.msg
+    const channel = req.query.channel
     const command = data.split(' ')
     let value = parseFloat(command[1])
     console.log(data)
@@ -19,7 +20,7 @@ module.exports.wheelCounter = (application, req, res) => {
 
     value = command[0].toLowerCase() === 'adicionar' ? value : value * (-1)
 
-    const ws = Array.from(application.appWs.clients).filter(el => el.id === 'lisannasu')
+    const ws = Array.from(application.appWs.clients).filter(el => el.id === channel)
 
     ws.forEach(el => el.send(value))
     res.sendStatus(200)
