@@ -1,30 +1,29 @@
 module.exports.wheelCounter = (application, req, res) => {
     const data = req.query.msg
     const channel = req.query.channel
-    const command = data.split(' ')
-    console.log(data)
 
-    if (command.length === 3) {
-        let value = parseFloat(command[1])
-        let isCommand = true
+    console.log(data)
     
-        switch (command[2].toLowerCase()) {
+    if (data[0] === '+' || data[0] === '-') {
+        const signal = (data[0] === '+') ? 1 : -1
+        const command = signal === 1 ? data.split('+')[1].split(' ') : data.split('-')[1].split(' ')
+        let value = command[0] * signal
+        
+        switch(command[1]) {
             case 'h':
+            case 'hora':
+            case 'horas':
                 value *= 1000 * 60 * 60
                 break
             case 'min':
+            case 'minuto':
+            case 'minutos':
                 value *= 1000 * 60
-                break
-            default: 
-                isCommand = false
                 break
         }
 
-        if (isCommand) {
-            value = command[0].toLowerCase() === 'adicionar' ? value : value * (-1)
-            const ws = Array.from(application.appWs.clients).filter(el => el.id === channel)
-            ws.forEach(el => el.send(value))
-        }
+        const ws = Array.from(application.appWs.clients).filter(el => el.id === channel)
+        ws.forEach(el => el.send(value))
     }
     res.sendStatus(200)
 }
